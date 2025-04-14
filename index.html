@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaibarath Subramaniam - Creative Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #2a2118; /* Dark brown */
+            --secondary-color: #ff8c00; /* Orange */
+            --accent-color: #e67e22; /* Secondary orange tone */
+            --accent-color-2: #3498db; /* Blue accent */
+            --accent-color-3: #27ae60; /* Green accent */
+            --accent-color-4: #9b59b6; /* Purple accent */
+            --light-bg: #fdf6e3; /* Slightly warm light background */
+            --dark-text: #333;
+            --light-text: #f8f9fa;
+            --gradient-bg: linear-gradient(135deg, var(--primary-color), #483424);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            scroll-behavior: smooth;
+        }
+        
+        /* Header with slideshow */
+        header {
+            position: relative;
+            color: var(--light-text);
+            text-align: center;
+            padding: 0;
+            overflow: hidden;
+            height: 60vh;
+            min-height: 350px;
+            z-index: 10;
+        }
+        
+        .slideshow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .slideshow-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-color: var(--primary-color); /* Fallback color */
+        }
+        
+        .slideshow-slide.active {
+            opacity: 1;
+        }
+        
+        .slideshow-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(42, 33, 24, 0.7); /* Dark overlay with transparency */
+            z-index: -1;
+        }
+        
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 100px 20px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInDown 1s ease;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            margin-top: 0.8rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .contact-info {
+            margin-top: 1.2rem;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .resume-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            margin-top: 1.5rem;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .resume-button:hover {
+            background-color: white;
+            color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        
+        nav {
+            background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        nav.sticky {
+            padding: 0.5rem 0;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 80%;
+            left: 10%;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            margin-bottom: 5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.4s ease;
+        }
+        
+        section:hover h2::after {
+            width: 100%;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .skill-category {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--secondary-color);
+        }
+        
+        .skill-category:nth-child(2) {
+            border-top-color: var(--accent-color-2);
+        }
+        
+        .skill-category:nth-child(3) {
+            border-top-color: var(--accent-color-3);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .skill-category h3 {
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .skill-category h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: currentColor;
+        }
+        
+        .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .skill-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .skill-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-list li:hover {
+            padding-left: 2rem;
+            color: var(--secondary-color);
+        }
+        
+        .skill-list li:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .portfolio-items, .cad-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .portfolio-item, .cad-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .portfolio-item:hover, .cad-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .portfolio-img, .cad-img {
+            width: 100%;
+            height: 220px;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .portfolio-img::after, .cad-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-img::after,
+        .cad-item:hover .cad-img::after {
+            opacity: 1;
+        }
+        
+        .portfolio-img img, .cad-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-img img,
+        .cad-item:hover .cad-img img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-content, .cad-content {
+            padding: 1.5rem;
+        }
+        
+        .portfolio-content h3, .cad-content h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-content h3,
+        .cad-item:hover .cad-content h3 {
+            color: var(--secondary-color);
+        }
+        
+        .tools-used {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tool-tag {
+            background-color: var(--light-bg);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-tag:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .experience-item {
+            margin-bottom: 2rem;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .experience-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-left: 3px solid var(--secondary-color);
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .company {
+            font-weight: bold;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+        
+        .experience-item:hover .company {
+            color: var(--secondary-color);
+        }
+        
+        .duration {
+            color: #777;
+            background: rgba(255, 140, 0, 0.1);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .position {
+            color: var(--accent-color-2);
+            font-weight: 500;
+        }
+        
+        .experience-content ul {
+            padding-left: 1.5rem;
+        }
+        
+        .experience-content li {
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .experience-content li::marker {
+            color: var(--secondary-color);
+        }
+        
+        .experience-content li:hover {
+            transform: translateX(5px);
+            color: var(--primary-color);
+        }
+        
+        .about-me {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .about-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5;
+            border: 3px solid var(--secondary-color);
+            transition: all 0.5s ease;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .about-photo::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px dashed var(--secondary-color);
+            animation: spin 30s linear infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        
+        .about-photo:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 15px 30px rgba(255, 140, 0, 0.4);
+        }
+        
+        .about-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .about-content p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+        
+        .about-content p:first-of-type {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .artistic-process {
+            margin-top: 3rem;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:nth-child(1) {
+            border-top: 3px solid var(--secondary-color);
+        }
+        
+        .process-step:nth-child(2) {
+            border-top: 3px solid var(--accent-color-2);
+        }
+        
+        .process-step:nth-child(3) {
+            border-top: 3px solid var(--accent-color-3);
+        }
+        
+        .process-step:nth-child(4) {
+            border-top: 3px solid var(--accent-color-4);
+        }
+        
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .process-step:nth-child(2) .step-number {
+            background-color: var(--accent-color-2);
+        }
+        
+        .process-step:nth-child(3) .step-number {
+            background-color: var(--accent-color-3);
+        }
+        
+        .process-step:nth-child(4) .step-number {
+            background-color: var(--accent-color-4);
+        }
+        
+        .process-step:hover .step-number {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .process-step h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        
+        /* New section: CAD Drawings */
+        #cad-drawings {
+            position: relative;
+        }
+        
+        .section-badge {
+            position: absolute;
+            top: -15px;
+            right: 0;
+            background-color: var(--accent-color-3);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .cad-item {
+            background: linear-gradient(to bottom, white, #f9f9f9);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .cad-img:hover .image-overlay {
+            opacity: 1;
+        }
+        
+        .overlay-content {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .view-details {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin-top: 0.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .view-details:hover {
+            background: white;
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        /* Contact form styling */
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.2);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Contact info styling */
+        .contact-info-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem;
+            background: var(--light-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+        }
+        
+        .contact-item:nth-child(2) .contact-icon {
+            color: var(--accent-color-2);
+        }
+        
+        .contact-item:nth-child(3) .contact-icon {
+            color: var(--accent-color-3);
+        }
+        
+        .contact-label {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .contact-value {
+            margin-top: 0.5rem;
+        }
+        
+        .contact-value a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            background: var(--gradient-bg);
+            color: var(--light-text);
+            text-align: center;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(to top, rgba(42, 33, 24, 0.1), transparent);
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links {
+            margin-top: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--light-text);
+            margin: 0 0.8rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            position: relative;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Modal styles for CAD drawings */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            opacity: 1;
+            display: block;
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: translateY(-30px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .modal.show .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .close-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--secondary-color);
+        }
+        
+        .modal-img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            margin: 1rem 0;
+        }
+        
+        .modal-details h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        /* Loading animation */
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--secondary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+        
+        /* Animation keyframes */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            header {
+                height: 50vh;
+            }
+            
+            .header-content {
+                padding: 70px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .about-me {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-photo {
+                margin: 0 auto 2rem;
+            }
+            
+            .experience-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .portfolio-items, .cad-items {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .process-step {
+                min-width: 100%;
+            }
+            
+            .contact-item {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="slideshow-container">
+            <!-- Slideshow images will be dynamically populated -->
+            <div class="slideshow-slide active" style="background-image: url('/api/placeholder/1200/700');"></div>
+            <div class="slideshow-slide" style="background-image: url('/api/placeholder/1200/700');"></div>
+            <div class="slideshow-slide" style="background-image: url('/api/placeholder/1200/700');"></div>
+            <div class="slideshow-overlay"></div>
+        </div>
+        <div class="header-content">
+            <h1>Jaibarath Subramaniam Ravichandran</h1>
+            <p class="tagline">Quality-focused Engineer with Creative Evaluation Expertise</p>
+            <p class="contact-info">617-448-5093 | subramaniamravicha.j@northeastern.edu</p>
+            <a href="javascript:void(0)" class="resume-button" id="download-resume">Download Resume</a>
+        </div>
+    </header>
+    
+    <nav id="main-nav">
+        <ul>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#cad-drawings">CAD Drawings</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <section id="about" class="section">
+            <h2>About Me</h2>
+            <div class="about-me">
+                <div class="about-photo">
+                    <img src="/api/placeholder/200/200" alt="Jaibarath Subramaniam Ravichandran">
+                </div>
+                <div class="about-content">
+                    <p>I am an Industrial Engineering graduate student with a strong background in quality control, process optimization, and attention to detail. My mechanical engineering foundation combined with my experience in quality assurance has given me a unique perspective on evaluating visual aesthetics and technical accuracy.</p>
+                    <p>My expertise in quality management systems, root cause analysis, and defect identification makes me an ideal candidate for creative evaluation roles that require critical thinking and analytical skills. I've spent years developing my eye for detail through rigorous quality inspection processes and lean manufacturing improvements.</p>
+                    <p>Currently pursuing my MS in Industrial Engineering at Northeastern University, I'm passionate about applying my technical expertise to the creative sector, particularly in AI-driven content evaluation and quality assurance.</p>
+                </div>
+            </div>
+            
+            <div class="artistic-process">
+                <h3>My Evaluation Process</h3>
+                <p>When approaching creative evaluation, I follow a structured methodology that combines technical assessment with aesthetic appreciation:</p>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h4>Analysis of Requirements</h4>
+                        <p>I begin by thoroughly understanding the prompt specifications and project requirements, establishing clear evaluation criteria.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h4>Technical Assessment</h4>
+                        <p>Using tools like Adobe Creative Suite, I analyze composition, color accuracy, lighting, and technical execution against established benchmarks.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h4>Aesthetic Evaluation</h4>
+                        <p>I assess creative elements like style consistency, artistic interpretation, and visual impact while maintaining objectivity.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h4>Detailed Feedback</h4>
+                        <p>I provide structured, actionable feedback with clear documentation of strengths, weaknesses, and specific improvement suggestions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills" class="section">
+            <h2>Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Creative & Technical Tools</h3>
+                    <ul class="skill-list">
+                        <li>Adobe Creative Suite (Photoshop, Illustrator, Premiere)</li>
+                        <li>Visual Analysis & Composition Assessment</li>
+                        <li>Color Theory & Lighting Evaluation</li>
+                        <li>Technical Drawing & CAD Proficiency</li>
+                        <li>Minitab & Statistical Analysis</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Quality Assessment</h3>
+                    <ul class="skill-list">
+                        <li>Quality Management Systems (QMS)</li>
+                        <li>Root Cause Analysis (RCA)</li>
+                        <li>Failure Mode and Effects Analysis (FMEA)</li>
+                        <li>Statistical Quality Control (SQC)</li>
+                        <li>Six Sigma Methodologies (Green Belt Certified)</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Process Improvement</h3>
+                    <ul class="skill-list">
+                        <li>Visual Stream Mapping (VSM)</li>
+                        <li>Time-Motion Studies</li>
+                        <li>Process Optimization Techniques</li>
+                        <li>Corrective and Preventive Action (CAPA)</li>
+                        <li>5S Methodology & Lean Principles</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="portfolio" class="section">
+            <h2>Portfolio</h2>
+            <div class="portfolio-items">
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="/api/placeholder/400/200" alt="Process Flow Chart">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Process Flow Optimization</h3>
+                        <p>Designed and implemented a comprehensive process flow system for manufacturing operations, focusing on critical control points and quality checkpoints throughout the production pipeline.</p>
+                        <div class="tools-used">
+                            <span class="tool-tag">Process Mapping</span>
+                            <span class="tool-tag">VSM</span>
+                            <span class="tool-tag">Workflow Optimization</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="/api/placeholder/400/200" alt="Quality Control Dashboard">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Quality Control Dashboard</h3>
+                        <p>Created an interactive quality metrics dashboard that visualizes key performance indicators, defect rates, and production efficiency statistics for manufacturing operations.</p>
+                        <div class="tools-used">
+                            <span class="tool-tag">PowerBI</span>
+                            <span class="tool-tag">Data Visualization</span>
+                            <span class="tool-tag">Quality Metrics</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="/api/placeholder/400/200" alt="Visual Inspection Framework">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Visual Inspection Framework</h3>
+                        <p>Developed a comprehensive visual inspection methodology with standardized evaluation criteria for consistent quality assessment across manufacturing and creative outputs.</p>
+                        <div class="tools-used">
+                            <span class="tool-tag">Quality Assessment</span>
+                            <span class="tool-tag">Visual Standards</span>
+                            <span class="tool-tag">Documentation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="/api/placeholder/400/200" alt="Material Design Documentation">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Al-Si Composite Material Visual Documentation</h3>
+                        <p>Created comprehensive visual documentation for Al-Si metal matrix composites research, including microscopy imagery analysis and property characterization visuals.</p>
+                        <div class="tools-used">
+                            <span class="tool-tag">Technical Photography</span>
+                            <span class="tool-tag">Image Analysis</span>
+                            <span class="tool-tag">Scientific Visualization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- New Section: CAD Drawings -->
+        <section id="cad-drawings" class="section">
+            <h2>CAD Drawings</h2>
+            <span class="section-badge">New</span>
+            <p>A showcase of my technical drawing abilities and CAD proficiency across various engineering projects:</p>
+            
+            <div class="cad-items">
+                <div class="cad-item">
+                    <div class="cad-img">
+                        <img src="/api/placeholder/400/220" alt="Metal Matrix Composite">
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <h4>Metal Matrix Composite Structure</h4>
+                                <a href="#" class="view-details" data-modal="cad1">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cad-content">
+                        <h3>Al-Si Metal Matrix Composite</h3>
+                        <p>High-resolution microscopy visualization of metal matrix composite structure, with technical documentation of material properties and characteristics.</p>
+                        <div class="tools-used">
+                            <span class="tool-tag">SEM Analysis</span>
+                            <span class="tool-tag">Microstructure</span>
+                            <span class="tool-tag">Technical Visualization</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cad-item">
+                    <div class="cad-img">
+                        <img src="/api/placeholder/400/220" alt="Process Flow Diagram">
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <h4>Manufacturing Process Flow</h4>
+                                <a href="#" class="view-details" data-modal="cad2">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cad-content">
+                        <h3>Process Flow Optimization</h3>
+                        <p>Comprehensive process flow diagram for manufacturing operations with color-coded quality control checkpoints and timeline visualization.</p>
+                        <div class="tools-used">
+                            <span class="tool-tag">Process Mapping</span>
+                            <span class="tool-tag">Quality Control</span>
+                            <span class="tool-tag">Workflow Design</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cad-item">
+                    <div class="cad-img">
+                        <img src="/api/placeholder/400/220" alt="Quality Metrics Dashboard">
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <h4>Quality Metrics Dashboard</h4>
+                                <a href="#" class="view-details" data-modal="cad3">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cad-content">
+                        <h3>Interactive Quality Metrics</h3>
+                        <p>Data visualization dashboard for quality performance metrics, defect tracking, and production efficiency monitoring across manufacturing operations.</p>
+                        <div class="tools-used">
+                            <span class="tool-tag">PowerBI</span>
+                            <span class="tool-tag">Data Visualization</span>
+                            <span class="tool-tag">Performance Metrics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="experience" class="section">
+            <h2>Relevant Experience</h2>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="company">Schroeder Hydraulics Private Limited</div>
+                    <div class="position">Quality Engineer</div>
+                    <div class="duration">Sep 2023 – Dec 2023</div>
+                </div>
+                <div class="experience-content">
+                    <ul>
+                        <li>Implemented QMS procedures aligned with ISO 9001, reducing customer complaints by 20%</li>
+                        <li>Led RCA and FMEA on hydraulic components to improve product reliability by eliminating defect sources</li>
+                        <li>Implemented process control metrics for better visibility into flow bottlenecks and production readiness</li>
+                        <li>Achieved 40% efficiency improvement through automated pressure testing implementation for 5000 PSI systems</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="company">Tube Products of India-Murugappa group</div>
+                    <div class="position">Graduate Engineer Trainee-QA</div>
+                    <div class="duration">May 2023 – Aug 2023</div>
+                </div>
+                <div class="experience-content">
+                    <ul>
+                        <li>Executed 2500+ inspections on CDW/ERW steel tubes maintaining 99.5% acceptance per ISO 19001/IATF 16949</li>
+                        <li>Managed 12 Toyota Quality Audits for propeller shaft housing achieving 0.5 PPM defect rate across 50,000 units</li>
+                        <li>Collaborated with design team to review and standardize component dimensions, reducing variation in assembly</li>
+                        <li>Cut inspection cycle time 35% for steel coils while maintaining <1% rejection rate across 500 MT monthly volume</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="company">Keller ITS India Pvt. Ltd.</div>
+                    <div class="position">Manufacturing Project Intern</div>
+                    <div class="duration">Dec 2022 – May 2023</div>
+                </div>
+                <div class="experience-content">
+                    <ul>
+                        <li>Utilized SPC tools to monitor performance indicators and find opportunities for improvements in thermal sensor calibration</li>
+                        <li>Led efficiency improvement initiatives reducing sensor assembly cycle time by 15% through lean manufacturing principles</li>
+                        <li>Partnered with QA to automate testing protocols, boosting infrared sensor calibration accuracy by 8%</li>
+                        <li>Conducted defect analysis reducing manufacturing scrap rate from 4.2% to 2.8% through corrective actions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="education" class="section">
+            <h2>Education & Certification</h2>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="company">Northeastern University</div>
+                    <div class="position">MS in Industrial Engineering</div>
+                    <div class="duration">Expected Apr 2026</div>
+                </div>
+                <div class="experience-content">
+                    <p><strong>Relevant Coursework:</strong> Intelligent Manufacturing, Lean Concepts, Operations Research, Supply Chain Engineering</p>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="company">St. Joseph's Institute of Technology</div>
+                    <div class="position">BE in Mechanical Engineering</div>
+                    <div class="duration">May 2023</div>
+                </div>
+                <div class="experience-content">
+                    <p><strong>Relevant Coursework:</strong> Quality Control, Industrial Management, Process Optimization, Systems and Operations</p>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="company">The Council for Six Sigma Certification</div>
+                    <div class="position">Lean Six Sigma Green Belt Certification</div>
+                    <div class="duration">Feb 2025</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="section">
+            <h2>Contact Me</h2>
+            <p>I'm currently seeking opportunities as a Creative Evaluator where I can apply my quality assurance expertise and attention to detail to AI-generated content evaluation. Please feel free to reach out via email or phone to discuss how my skills align with your requirements.</p>
+            
+            <div class="contact-info-card">
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-label">Phone</div>
+                    <div class="contact-value">617-448-5093</div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">
+                        <a href="mailto:subramaniamravicha.j@northeastern.edu">subramaniamravicha.j@northeastern.edu</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <div class="contact-label">LinkedIn</div>
+                    <div class="contact-value">
+                        <a href="#" target="_blank">LinkedIn Profile</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Send Me a Message</h3>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+                <div class="loader" id="form-loader"></div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Jaibarath Subramaniam Ravichandran</p>
+            
+            <div class="social-links">
+                <a href="#" class="social-link" title="LinkedIn">in</a>
+                <a href="#" class="social-link" title="GitHub">gh</a>
+                <a href="#" class="social-link" title="Twitter">tw</a>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#cad-drawings">CAD Drawings</a>
+                <a href="#experience">Experience</a>
+                <a href="#education">Education</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scroll to top button -->
+    <div class="scroll-top" id="scroll-top">↑</div>
+    
+    <!-- CAD Drawing Modals -->
+    <div id="cad1-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img src="/api/placeholder/800/500" alt="Metal Matrix Composite" class="modal-img">
+            <div class="modal-details">
+                <h3>Al-Si Metal Matrix Composite - Technical Details</h3>
+                <p>This high-resolution visualization showcases the microstructure of an aluminum-silicon metal matrix composite developed for high-performance manufacturing applications. The image highlights the interface between the aluminum matrix and silicon reinforcement phases.</p>
+                <p><strong>Key Technical Features:</strong></p>
+                <ul>
+                    <li>Detailed microstructural analysis showing phase distribution and interfacial characteristics</li>
+                    <li>Optimized composition with 15% silicon reinforcement for enhanced mechanical properties</li>
+                    <li>Heat treatment protocol documentation showing microstructural evolution</li>
+                    <li>Correlations between microstructure and mechanical property enhancements</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="cad2-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img src="/api/placeholder/800/500" alt="Process Flow Diagram" class="modal-img">
+            <div class="modal-details">
+                <h3>Process Flow Optimization - Technical Details</h3>
+                <p>This process flow diagram was developed to optimize manufacturing operations by visualizing the complete production pipeline with integrated quality control checkpoints and efficiency metrics. The diagram uses color-coding to highlight critical control points and potential bottlenecks.</p>
+                <p><strong>Key Design Features:</strong></p>
+                <ul>
+                    <li>Color-coded process stages for intuitive visualization of workflow</li>
+                    <li>Integrated quality control checkpoints at critical process junctures</li>
+                    <li>Cycle time and WIP inventory notations at each production stage</li>
+                    <li>Value-added vs. non-value-added step identification for lean optimization</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="cad3-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img src="/api/placeholder/800/500" alt="Quality Metrics Dashboard" class="modal-img">
+            <div class="modal-details">
+                <h3>Quality Metrics Dashboard - Technical Details</h3>
+                <p>This interactive dashboard was designed to provide real-time visualization of quality performance metrics across manufacturing operations. The interface combines multiple data sources to create a comprehensive view of production quality, defect rates, and efficiency statistics.</p>
+                <p><strong>Key Features:</strong></p>
+                <ul>
+                    <li>Real-time defect rate tracking with historical trend analysis</li>
+                    <li>Production efficiency metrics with target vs. actual comparisons</li>
+                    <li>Interactive drill-down capabilities for root cause investigation</li>
+                    <li>Automated alerting system for quality control threshold violations</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add intersection observer for scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Slideshow functionality
+            const slides = document.querySelectorAll('.slideshow-slide');
+            let currentSlide = 0;
+            
+            // Set slideshow images
+            const slideshowImages = [
+                '/api/placeholder/1200/700',  // Replace with your actual image paths
+                '/api/placeholder/1200/700',
+                '/api/placeholder/1200/700'
+            ];
+            
+            // Initialize slideshow images
+            slides.forEach((slide, index) => {
+                if (index < slideshowImages.length) {
+                    slide.style.backgroundImage = `url('${slideshowImages[index]}')`;
+                }
+            });
+            
+            // Function to change slide
+            function nextSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+            
+            // Change slide every 5 seconds
+            setInterval(nextSlide, 5000);
+            
+            // Make sections visible when scrolled into view
+            const sections = document.querySelectorAll('.section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Make navbar sticky and change appearance on scroll
+            const navbar = document.getElementById('main-nav');
+            const sticky = navbar.offsetTop;
+            const scrollTopBtn = document.getElementById('scroll-top');
+            
+            window.onscroll = function() {
+                // Sticky navbar
+                if (window.pageYOffset > sticky) {
+                    navbar.classList.add('sticky');
+                } else {
+                    navbar.classList.remove('sticky');
+                }
+                
+                // Scroll to top button visibility
+                if (window.pageYOffset > 500) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            };
+            
+            // Scroll to top functionality
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Add smooth scrolling for navigation links
+            document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId.startsWith('#')) {
+                        const targetElement = document.querySelector(targetId);
+                        
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 70,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contact-form');
+            const formLoader = document.getElementById('form-loader');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    formLoader.style.display = 'block';
+                    
+                    // Simulate form submission
+                    setTimeout(() => {
+                        formLoader.style.display = 'none';
+                        alert('Thank you for your message! I will get back to you soon.');
+                        contactForm.reset();
+                    }, 1500);
+                });
+            }
+            
+            // Resume download button functionality
+            const downloadResumeBtn = document.getElementById('download-resume');
+            if (downloadResumeBtn) {
+                downloadResumeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Your resume download will begin shortly.');
+                    // In a real implementation, this would trigger a file download
+                    // window.location.href = 'resume.pdf';
+                });
+            }
+            
+            // Modal functionality for CAD drawings
+            const modalTriggers = document.querySelectorAll('[data-modal]');
+            const closeButtons = document.querySelectorAll('.close-modal');
+            
+            modalTriggers.forEach(trigger => {
+                trigger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const modalId = this.getAttribute('data-modal');
+                    const modal = document.getElementById(modalId + '-modal');
+                    if (modal) {
+                        modal.classList.add('show');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+            
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const modal = this.closest('.modal');
+                    if (modal) {
+                        modal.classList.remove('show');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            });
+            
+            // Close modal when clicking outside of content
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.classList.remove('show');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
