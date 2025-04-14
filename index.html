@@ -3,53 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaibarath Subramaniam - Creative Portfolio</title>
+    <title>Jaibarath Subramaniam - Portfolio</title>
+    
+    <!-- Adobe Fonts (Devanagari) -->
+    <link rel="stylesheet" href="https://use.typekit.net/ksa5svi.css">
+    
     <style>
+        /* Color Variables */
         :root {
-            --primary-color: #2a2118; /* Dark brown */
-            --secondary-color: #ff8c00; /* Orange */
-            --accent-color: #e67e22; /* Secondary orange tone */
-            --accent-color-2: #3498db; /* Blue accent */
-            --accent-color-3: #27ae60; /* Green accent */
-            --accent-color-4: #9b59b6; /* Purple accent */
-            --light-bg: #fdf6e3; /* Slightly warm light background */
-            --dark-text: #333;
-            --light-text: #f8f9fa;
-            --gradient-bg: linear-gradient(135deg, var(--primary-color), #483424);
+            --orange-primary: #FF8C00;
+            --orange-light: #FFB347;
+            --orange-dark: #E67300;
+            --orange-vibrant: #FF6B00;
+            --orange-subtle: #FFD8A8;
+            --orange-deep: #CC5500;
+            --brown-dark: #2A2118;
+            --bg-light: #FFF4E6;
+            --text-dark: #333;
+            --text-light: #F8F9FA;
+        }
+        
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'adobe-devanagari', 'Segoe UI', sans-serif;
             line-height: 1.6;
-            color: var(--dark-text);
-            margin: 0;
-            padding: 0;
-            background-color: var(--light-bg);
-            scroll-behavior: smooth;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
         }
         
-        /* Header with slideshow */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            color: var(--orange-deep);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--orange-vibrant);
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: var(--orange-dark);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Header Styles */
         header {
             position: relative;
-            color: var(--light-text);
-            text-align: center;
-            padding: 0;
-            overflow: hidden;
             height: 60vh;
             min-height: 350px;
-            z-index: 10;
+            color: var(--text-light);
+            text-align: center;
+            overflow: hidden;
         }
         
-        .slideshow-container {
+        .header-slideshow {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
         }
         
-        .slideshow-slide {
+        .slide {
             position: absolute;
             top: 0;
             left: 0;
@@ -59,92 +86,90 @@
             background-position: center;
             opacity: 0;
             transition: opacity 1s ease-in-out;
-            background-color: var(--primary-color); /* Fallback color */
         }
         
-        .slideshow-slide.active {
+        .slide.active {
             opacity: 1;
         }
         
-        .slideshow-overlay {
+        .header-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(42, 33, 24, 0.7); /* Dark overlay with transparency */
+            background: linear-gradient(rgba(42, 33, 24, 0.8), rgba(204, 85, 0, 0.5));
             z-index: -1;
         }
         
         .header-content {
-            max-width: 800px;
-            margin: 0 auto;
             padding: 100px 20px;
             position: relative;
-            z-index: 2;
-            animation: fadeInDown 1s ease;
+            z-index: 1;
         }
         
-        h1 {
-            margin: 0;
+        .header-content h1 {
             font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         
-        .tagline {
-            font-size: 1.3rem;
-            margin-top: 0.8rem;
+        .header-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
         
-        .contact-info {
-            margin-top: 1.2rem;
-            font-size: 1.1rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        
-        .resume-button {
+        .resume-btn {
             display: inline-block;
-            background-color: var(--secondary-color);
+            background: linear-gradient(to right, var(--orange-vibrant), var(--orange-primary));
             color: white;
-            padding: 0.8rem 1.5rem;
-            margin-top: 1.5rem;
-            text-decoration: none;
+            padding: 12px 30px;
             border-radius: 30px;
             font-weight: bold;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
         }
         
-        .resume-button:hover {
-            background-color: white;
-            color: var(--secondary-color);
-            border-color: var(--secondary-color);
+        .resume-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .resume-btn:hover:before {
+            left: 100%;
+        }
+        
+        .resume-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, var(--orange-dark), var(--orange-deep));
         }
         
+        /* Navigation Styles */
         nav {
-            background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+            background: linear-gradient(to right, var(--orange-dark), var(--orange-vibrant));
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        nav.sticky {
-            padding: 0.5rem 0;
         }
         
         nav ul {
             display: flex;
             justify-content: center;
             list-style: none;
-            margin: 0;
-            padding: 0;
         }
         
         nav li {
@@ -152,12 +177,11 @@
         }
         
         nav a {
-            color: var(--light-text);
-            text-decoration: none;
+            color: white;
             font-weight: bold;
-            padding: 0.5rem 1rem;
+            padding: 8px 16px;
             border-radius: 4px;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             position: relative;
         }
         
@@ -169,7 +193,7 @@
             bottom: 0;
             left: 50%;
             background-color: white;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
         
         nav a:hover::after {
@@ -182,6 +206,7 @@
             transform: translateY(-2px);
         }
         
+        /* Main Content Styles */
         main {
             max-width: 1200px;
             margin: 2rem auto;
@@ -189,45 +214,161 @@
         }
         
         section {
-            margin-bottom: 5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            margin-bottom: 4rem;
         }
         
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--orange-primary);
+            display: inline-block;
             padding-bottom: 0.5rem;
             position: relative;
-            display: inline-block;
-            margin-bottom: 1.5rem;
         }
         
-        h2::after {
+        section h2::after {
             content: '';
             position: absolute;
             bottom: -2px;
             left: 0;
             width: 50px;
             height: 2px;
-            background-color: var(--accent-color);
-            transition: width 0.4s ease;
+            background-color: var(--orange-dark);
+            transition: width 0.4s;
         }
         
-        section:hover h2::after {
+        section h2:hover::after {
             width: 100%;
         }
         
+        /* About Section */
+        .about-me {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .about-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            overflow: hidden;
+            border: 3px solid var(--orange-vibrant);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .about-photo::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px dashed var(--orange-vibrant);
+            animation: spin 30s linear infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        
+        .about-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .about-content p:first-of-type {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--orange-deep);
+        }
+        
+        /* Process Steps */
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .process-step {
+            flex: 1;
+            min-width: 230px;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .process-step:nth-child(1) {
+            border-top: 3px solid var(--orange-vibrant);
+        }
+        
+        .process-step:nth-child(2) {
+            border-top: 3px solid var(--orange-light);
+        }
+        
+        .process-step:nth-child(3) {
+            border-top: 3px solid var(--orange-dark);
+        }
+        
+        .process-step:nth-child(4) {
+            border-top: 3px solid var(--orange-deep);
+        }
+        
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--orange-vibrant);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        
+        .process-step:nth-child(2) .step-number {
+            background-color: var(--orange-light);
+        }
+        
+        .process-step:nth-child(3) .step-number {
+            background-color: var(--orange-dark);
+        }
+        
+        .process-step:nth-child(4) .step-number {
+            background-color: var(--orange-deep);
+        }
+        
+        .process-step:hover .step-number {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .process-step h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Skills Section */
         .skills-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 1.5rem;
         }
         
         .skill-category {
@@ -237,16 +378,16 @@
             padding: 1.5rem;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-top: 4px solid var(--secondary-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--orange-vibrant);
         }
         
         .skill-category:nth-child(2) {
-            border-top-color: var(--accent-color-2);
+            border-top-color: var(--orange-light);
         }
         
         .skill-category:nth-child(3) {
-            border-top-color: var(--accent-color-3);
+            border-top-color: var(--orange-dark);
         }
         
         .skill-category:hover {
@@ -255,7 +396,8 @@
         }
         
         .skill-category h3 {
-            color: var(--primary-color);
+            color: var(--orange-deep);
+            margin-bottom: 1rem;
             position: relative;
             padding-bottom: 0.5rem;
         }
@@ -272,13 +414,12 @@
         
         .skill-list {
             list-style: none;
-            padding: 0;
         }
         
         .skill-list li {
             padding: 0.5rem 0;
             border-bottom: 1px solid #eee;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             position: relative;
             padding-left: 1.5rem;
         }
@@ -287,16 +428,16 @@
             content: '✓';
             position: absolute;
             left: 0;
-            color: var(--secondary-color);
+            color: var(--orange-vibrant);
             font-weight: bold;
             opacity: 0;
             transform: translateX(-10px);
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
         
         .skill-list li:hover {
             padding-left: 2rem;
-            color: var(--secondary-color);
+            color: var(--orange-vibrant);
         }
         
         .skill-list li:hover::before {
@@ -308,79 +449,55 @@
             border-bottom: none;
         }
         
-        .portfolio-items, .cad-items {
+        /* Portfolio Section */
+        .portfolio-items {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
         
-        .portfolio-item, .cad-item {
+        .portfolio-item {
             background-color: white;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-bottom: 3px solid var(--orange-light);
         }
         
-        .portfolio-item:hover, .cad-item:hover {
+        .portfolio-item:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-bottom-color: var(--orange-vibrant);
         }
         
-        .portfolio-img, .cad-img {
-            width: 100%;
-            height: 220px;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .portfolio-img {
+            height: 200px;
             overflow: hidden;
-            position: relative;
         }
         
-        .portfolio-img::after, .cad-img::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.2));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .portfolio-item:hover .portfolio-img::after,
-        .cad-item:hover .cad-img::after {
-            opacity: 1;
-        }
-        
-        .portfolio-img img, .cad-img img {
+        .portfolio-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s;
         }
         
-        .portfolio-item:hover .portfolio-img img,
-        .cad-item:hover .cad-img img {
+        .portfolio-item:hover .portfolio-img img {
             transform: scale(1.05);
         }
         
-        .portfolio-content, .cad-content {
+        .portfolio-content {
             padding: 1.5rem;
         }
         
-        .portfolio-content h3, .cad-content h3 {
-            margin-top: 0;
-            color: var(--primary-color);
-            transition: color 0.3s ease;
+        .portfolio-content h3 {
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
         }
         
-        .portfolio-item:hover .portfolio-content h3,
-        .cad-item:hover .cad-content h3 {
-            color: var(--secondary-color);
+        .portfolio-item:hover .portfolio-content h3 {
+            color: var(--orange-vibrant);
         }
         
         .tools-used {
@@ -391,232 +508,21 @@
         }
         
         .tool-tag {
-            background-color: var(--light-bg);
+            background-color: var(--orange-subtle);
             padding: 0.3rem 0.6rem;
             border-radius: 20px;
             font-size: 0.8rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
         
         .tool-tag:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--orange-vibrant);
             color: white;
             transform: scale(1.05);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         
-        .experience-item {
-            margin-bottom: 2rem;
-            background-color: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-        }
-        
-        .experience-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            border-left: 3px solid var(--secondary-color);
-        }
-        
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .company {
-            font-weight: bold;
-            color: var(--primary-color);
-            transition: color 0.3s ease;
-        }
-        
-        .experience-item:hover .company {
-            color: var(--secondary-color);
-        }
-        
-        .duration {
-            color: #777;
-            background: rgba(255, 140, 0, 0.1);
-            padding: 0.2rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-        
-        .position {
-            color: var(--accent-color-2);
-            font-weight: 500;
-        }
-        
-        .experience-content ul {
-            padding-left: 1.5rem;
-        }
-        
-        .experience-content li {
-            margin-bottom: 0.5rem;
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-        
-        .experience-content li::marker {
-            color: var(--secondary-color);
-        }
-        
-        .experience-content li:hover {
-            transform: translateX(5px);
-            color: var(--primary-color);
-        }
-        
-        .about-me {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-        
-        .about-photo {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f5f5f5;
-            border: 3px solid var(--secondary-color);
-            transition: all 0.5s ease;
-            position: relative;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .about-photo::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            border-radius: 50%;
-            border: 2px dashed var(--secondary-color);
-            animation: spin 30s linear infinite;
-            opacity: 0.7;
-        }
-        
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-        
-        .about-photo:hover {
-            transform: scale(1.05) rotate(5deg);
-            box-shadow: 0 15px 30px rgba(255, 140, 0, 0.4);
-        }
-        
-        .about-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        
-        .about-content p {
-            margin-bottom: 1rem;
-            text-align: justify;
-        }
-        
-        .about-content p:first-of-type {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--primary-color);
-        }
-        
-        .artistic-process {
-            margin-top: 3rem;
-        }
-        
-        .process-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .process-step {
-            flex: 1;
-            min-width: 250px;
-            background-color: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .process-step:nth-child(1) {
-            border-top: 3px solid var(--secondary-color);
-        }
-        
-        .process-step:nth-child(2) {
-            border-top: 3px solid var(--accent-color-2);
-        }
-        
-        .process-step:nth-child(3) {
-            border-top: 3px solid var(--accent-color-3);
-        }
-        
-        .process-step:nth-child(4) {
-            border-top: 3px solid var(--accent-color-4);
-        }
-        
-        .process-step:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .step-number {
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            width: 40px;
-            height: 40px;
-            background-color: var(--secondary-color);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        
-        .process-step:nth-child(2) .step-number {
-            background-color: var(--accent-color-2);
-        }
-        
-        .process-step:nth-child(3) .step-number {
-            background-color: var(--accent-color-3);
-        }
-        
-        .process-step:nth-child(4) .step-number {
-            background-color: var(--accent-color-4);
-        }
-        
-        .process-step:hover .step-number {
-            transform: scale(1.1) rotate(10deg);
-        }
-        
-        .process-step h4 {
-            margin-top: 0;
-            color: var(--primary-color);
-        }
-        
-        /* New section: CAD Drawings */
-        #cad-drawings {
+        /* CAD Drawings Section */
+        .cad-section {
             position: relative;
         }
         
@@ -624,7 +530,7 @@
             position: absolute;
             top: -15px;
             right: 0;
-            background-color: var(--accent-color-3);
+            background-color: var(--orange-vibrant);
             color: white;
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
@@ -640,26 +546,58 @@
             100% { transform: scale(1); }
         }
         
-        .cad-item {
-            background: linear-gradient(to bottom, white, #f9f9f9);
+        .cad-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
         
-        .image-overlay {
+        .cad-item {
+            background: linear-gradient(to bottom, white, var(--orange-subtle));
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .cad-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cad-img {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cad-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .cad-item:hover .cad-img img {
+            transform: scale(1.05);
+        }
+        
+        .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(255, 140, 0, 0.7);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s;
         }
         
-        .cad-img:hover .image-overlay {
+        .cad-img:hover .overlay {
             opacity: 1;
         }
         
@@ -668,96 +606,113 @@
             padding: 1rem;
         }
         
-        .view-details {
+        .view-btn {
             display: inline-block;
-            background: var(--secondary-color);
+            background: var(--orange-deep);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 20px;
             margin-top: 0.5rem;
             font-weight: bold;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
         
-        .view-details:hover {
+        .view-btn:hover {
             background: white;
-            color: var(--secondary-color);
+            color: var(--orange-deep);
             transform: translateY(-2px);
         }
         
-        /* Contact form styling */
-        .contact-form {
-            background: white;
-            padding: 2rem;
+        .cad-content {
+            padding: 1.5rem;
+        }
+        
+        .cad-content h3 {
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .cad-item:hover .cad-content h3 {
+            color: var(--orange-vibrant);
+        }
+        
+        /* Experience Section */
+        .experience-item {
+            margin-bottom: 2rem;
+            background-color: white;
+            padding: 1.5rem;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin-top: 2rem;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
         }
         
-        .form-group {
-            margin-bottom: 1.5rem;
+        .experience-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-left: 3px solid var(--orange-vibrant);
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--primary-color);
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
         
-        .form-control {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: inherit;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.2);
-            outline: none;
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
-            color: white;
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 30px;
-            cursor: pointer;
+        .company {
             font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: var(--orange-deep);
+            transition: color 0.3s;
         }
         
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        .experience-item:hover .company {
+            color: var(--orange-vibrant);
         }
         
-        /* Contact info styling */
+        .position {
+            color: var(--orange-dark);
+            font-weight: 500;
+        }
+        
+        .duration {
+            color: #777;
+            background: rgba(255, 140, 0, 0.1);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .experience-content ul {
+            padding-left: 1.5rem;
+        }
+        
+        .experience-content li {
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .experience-content li:hover {
+            transform: translateX(5px);
+            color: var(--orange-deep);
+        }
+        
+        /* Contact Section */
         .contact-info-card {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
         
         .contact-item {
             flex: 1;
             min-width: 200px;
-            background: white;
+            background: linear-gradient(to bottom, white, var(--orange-subtle));
             padding: 1.5rem;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             text-align: center;
         }
         
@@ -770,59 +725,117 @@
             width: 50px;
             height: 50px;
             margin: 0 auto 1rem;
-            background: var(--light-bg);
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            color: var(--secondary-color);
+            color: var(--orange-vibrant);
             font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover .contact-icon {
+            background-color: var(--orange-vibrant);
+            color: white;
+            transform: scale(1.1);
         }
         
         .contact-item:nth-child(2) .contact-icon {
-            color: var(--accent-color-2);
+            color: var(--orange-dark);
         }
         
         .contact-item:nth-child(3) .contact-icon {
-            color: var(--accent-color-3);
+            color: var(--orange-deep);
         }
         
         .contact-label {
             font-weight: bold;
-            color: var(--primary-color);
+            color: var(--orange-deep);
+            margin-bottom: 0.5rem;
         }
         
-        .contact-value {
-            margin-top: 0.5rem;
+        /* Contact Form */
+        .contact-form {
+            background: linear-gradient(to bottom right, white, var(--orange-subtle));
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .contact-value a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
+        .form-group {
+            margin-bottom: 1.5rem;
         }
         
-        .contact-value a:hover {
-            text-decoration: underline;
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--orange-deep);
         }
         
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--orange-vibrant);
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.2);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--orange-vibrant), var(--orange-dark));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .submit-btn:hover:before {
+            left: 100%;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, var(--orange-dark), var(--orange-deep));
+        }
+        
+        /* Footer */
         footer {
-            background: var(--gradient-bg);
-            color: var(--light-text);
+            background: linear-gradient(135deg, var(--orange-deep), var(--orange-dark));
+            color: white;
             text-align: center;
             padding: 3rem 0 2rem;
             margin-top: 3rem;
-            position: relative;
-        }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: 0;
-            width: 100%;
-            height: 50px;
-            background: linear-gradient(to top, rgba(42, 33, 24, 0.1), transparent);
         }
         
         .footer-content {
@@ -846,11 +859,11 @@
             justify-content: center;
             align-items: center;
             color: white;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
         
         .social-link:hover {
-            background: var(--secondary-color);
+            background: var(--orange-vibrant);
             transform: translateY(-3px);
         }
         
@@ -859,10 +872,9 @@
         }
         
         .footer-links a {
-            color: var(--light-text);
+            color: white;
             margin: 0 0.8rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
+            transition: all 0.3s;
             padding: 0.3rem 0.6rem;
             border-radius: 3px;
             position: relative;
@@ -875,8 +887,8 @@
             height: 1px;
             bottom: 0;
             left: 50%;
-            background-color: var(--secondary-color);
-            transition: all 0.3s ease;
+            background-color: var(--orange-light);
+            transition: all 0.3s;
         }
         
         .footer-links a:hover::after {
@@ -885,16 +897,17 @@
         }
         
         .footer-links a:hover {
-            color: var(--secondary-color);
+            color: var(--orange-light);
         }
         
-        .scroll-top {
+        /* Back to Top Button */
+        .back-to-top {
             position: fixed;
             bottom: 20px;
             right: 20px;
             width: 40px;
             height: 40px;
-            background-color: var(--secondary-color);
+            background-color: var(--orange-vibrant);
             color: white;
             border-radius: 50%;
             display: flex;
@@ -902,125 +915,18 @@
             align-items: center;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
             cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
             z-index: 99;
+            transition: all 0.3s;
         }
         
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .scroll-top:hover {
-            background-color: var(--accent-color);
+        .back-to-top:hover {
+            background-color: var(--orange-deep);
             transform: translateY(-3px);
         }
         
-        /* Modal styles for CAD drawings */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.8);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .modal.show {
-            opacity: 1;
-            display: block;
-        }
-        
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 800px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            transform: translateY(-30px);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-        
-        .modal.show .modal-content {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .close-modal {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-        
-        .close-modal:hover {
-            color: var(--secondary-color);
-        }
-        
-        .modal-img {
-            width: 100%;
-            max-height: 500px;
-            object-fit: contain;
-            margin: 1rem 0;
-        }
-        
-        .modal-details h3 {
-            color: var(--primary-color);
-            margin-top: 0;
-        }
-        
-        /* Loading animation */
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--secondary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-            display: none;
-        }
-        
-        /* Animation keyframes */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* Mobile responsiveness */
+        /* Responsive Styles */
         @media (max-width: 768px) {
-            header {
-                height: 50vh;
-            }
-            
-            .header-content {
-                padding: 70px 20px;
-            }
-            
-            h1 {
+            .header-content h1 {
                 font-size: 2rem;
             }
             
@@ -1038,10 +944,6 @@
                 gap: 0.5rem;
             }
             
-            .portfolio-items, .cad-items {
-                grid-template-columns: 1fr;
-            }
-            
             nav ul {
                 flex-direction: column;
                 align-items: center;
@@ -1050,35 +952,28 @@
             nav li {
                 margin: 0.5rem 0;
             }
-            
-            .process-step {
-                min-width: 100%;
-            }
-            
-            .contact-item {
-                min-width: 100%;
-            }
         }
     </style>
 </head>
 <body>
+    <!-- Header with Slideshow -->
     <header>
-        <div class="slideshow-container">
-            <!-- Slideshow images will be dynamically populated -->
-            <div class="slideshow-slide active" style="background-image: url('/api/placeholder/1200/700');"></div>
-            <div class="slideshow-slide" style="background-image: url('/api/placeholder/1200/700');"></div>
-            <div class="slideshow-slide" style="background-image: url('/api/placeholder/1200/700');"></div>
-            <div class="slideshow-overlay"></div>
+        <div class="header-slideshow">
+            <div class="slide active" style="background-image: url('/api/placeholder/1200/700')"></div>
+            <div class="slide" style="background-image: url('/api/placeholder/1200/700')"></div>
+            <div class="slide" style="background-image: url('/api/placeholder/1200/700')"></div>
         </div>
+        <div class="header-overlay"></div>
         <div class="header-content">
             <h1>Jaibarath Subramaniam Ravichandran</h1>
             <p class="tagline">Quality-focused Engineer with Creative Evaluation Expertise</p>
             <p class="contact-info">617-448-5093 | subramaniamravicha.j@northeastern.edu</p>
-            <a href="javascript:void(0)" class="resume-button" id="download-resume">Download Resume</a>
+            <a href="#" class="resume-btn" id="downloadResume">Download Resume</a>
         </div>
     </header>
     
-    <nav id="main-nav">
+    <!-- Navigation -->
+    <nav>
         <ul>
             <li><a href="#about">About Me</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -1090,8 +985,10 @@
         </ul>
     </nav>
     
+    <!-- Main Content -->
     <main>
-        <section id="about" class="section">
+        <!-- About Section -->
+        <section id="about">
             <h2>About Me</h2>
             <div class="about-me">
                 <div class="about-photo">
@@ -1104,39 +1001,35 @@
                 </div>
             </div>
             
-            <div class="artistic-process">
-                <h3>My Evaluation Process</h3>
-                <p>When approaching creative evaluation, I follow a structured methodology that combines technical assessment with aesthetic appreciation:</p>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Analysis of Requirements</h4>
+                    <p>I begin by thoroughly understanding the prompt specifications and project requirements, establishing clear evaluation criteria.</p>
+                </div>
                 
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h4>Analysis of Requirements</h4>
-                        <p>I begin by thoroughly understanding the prompt specifications and project requirements, establishing clear evaluation criteria.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h4>Technical Assessment</h4>
-                        <p>Using tools like Adobe Creative Suite, I analyze composition, color accuracy, lighting, and technical execution against established benchmarks.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h4>Aesthetic Evaluation</h4>
-                        <p>I assess creative elements like style consistency, artistic interpretation, and visual impact while maintaining objectivity.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h4>Detailed Feedback</h4>
-                        <p>I provide structured, actionable feedback with clear documentation of strengths, weaknesses, and specific improvement suggestions.</p>
-                    </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Technical Assessment</h4>
+                    <p>Using tools like Adobe Creative Suite, I analyze composition, color accuracy, lighting, and technical execution against established benchmarks.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Aesthetic Evaluation</h4>
+                    <p>I assess creative elements like style consistency, artistic interpretation, and visual impact while maintaining objectivity.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Detailed Feedback</h4>
+                    <p>I provide structured, actionable feedback with clear documentation of strengths, weaknesses, and specific improvement suggestions.</p>
                 </div>
             </div>
         </section>
         
-        <section id="skills" class="section">
+        <!-- Skills Section -->
+        <section id="skills">
             <h2>Skills</h2>
             <div class="skills-container">
                 <div class="skill-category">
@@ -1174,7 +1067,8 @@
             </div>
         </section>
         
-        <section id="portfolio" class="section">
+        <!-- Portfolio Section -->
+        <section id="portfolio">
             <h2>Portfolio</h2>
             <div class="portfolio-items">
                 <div class="portfolio-item">
@@ -1183,7 +1077,7 @@
                     </div>
                     <div class="portfolio-content">
                         <h3>Process Flow Optimization</h3>
-                        <p>Designed and implemented a comprehensive process flow system for manufacturing operations, focusing on critical control points and quality checkpoints throughout the production pipeline.</p>
+                        <p>Designed and implemented a comprehensive process flow system for manufacturing operations, focusing on critical control points and quality checkpoints.</p>
                         <div class="tools-used">
                             <span class="tool-tag">Process Mapping</span>
                             <span class="tool-tag">VSM</span>
@@ -1198,7 +1092,7 @@
                     </div>
                     <div class="portfolio-content">
                         <h3>Quality Control Dashboard</h3>
-                        <p>Created an interactive quality metrics dashboard that visualizes key performance indicators, defect rates, and production efficiency statistics for manufacturing operations.</p>
+                        <p>Created an interactive quality metrics dashboard that visualizes key performance indicators, defect rates, and production efficiency statistics.</p>
                         <div class="tools-used">
                             <span class="tool-tag">PowerBI</span>
                             <span class="tool-tag">Data Visualization</span>
@@ -1213,7 +1107,7 @@
                     </div>
                     <div class="portfolio-content">
                         <h3>Visual Inspection Framework</h3>
-                        <p>Developed a comprehensive visual inspection methodology with standardized evaluation criteria for consistent quality assessment across manufacturing and creative outputs.</p>
+                        <p>Developed a comprehensive visual inspection methodology with standardized evaluation criteria for consistent quality assessment.</p>
                         <div class="tools-used">
                             <span class="tool-tag">Quality Assessment</span>
                             <span class="tool-tag">Visual Standards</span>
@@ -1227,8 +1121,8 @@
                         <img src="/api/placeholder/400/200" alt="Material Design Documentation">
                     </div>
                     <div class="portfolio-content">
-                        <h3>Al-Si Composite Material Visual Documentation</h3>
-                        <p>Created comprehensive visual documentation for Al-Si metal matrix composites research, including microscopy imagery analysis and property characterization visuals.</p>
+                        <h3>Al-Si Composite Material Documentation</h3>
+                        <p>Created comprehensive visual documentation for Al-Si metal matrix composites research, including microscopy imagery analysis.</p>
                         <div class="tools-used">
                             <span class="tool-tag">Technical Photography</span>
                             <span class="tool-tag">Image Analysis</span>
@@ -1239,8 +1133,8 @@
             </div>
         </section>
         
-        <!-- New Section: CAD Drawings -->
-        <section id="cad-drawings" class="section">
+        <!-- CAD Drawings Section -->
+        <section id="cad-drawings" class="cad-section">
             <h2>CAD Drawings</h2>
             <span class="section-badge">New</span>
             <p>A showcase of my technical drawing abilities and CAD proficiency across various engineering projects:</p>
@@ -1248,17 +1142,17 @@
             <div class="cad-items">
                 <div class="cad-item">
                     <div class="cad-img">
-                        <img src="/api/placeholder/400/220" alt="Metal Matrix Composite">
-                        <div class="image-overlay">
+                        <img src="/api/placeholder/400/200" alt="Metal Matrix Composite">
+                        <div class="overlay">
                             <div class="overlay-content">
                                 <h4>Metal Matrix Composite Structure</h4>
-                                <a href="#" class="view-details" data-modal="cad1">View Details</a>
+                                <a href="#" class="view-btn">View Details</a>
                             </div>
                         </div>
                     </div>
                     <div class="cad-content">
                         <h3>Al-Si Metal Matrix Composite</h3>
-                        <p>High-resolution microscopy visualization of metal matrix composite structure, with technical documentation of material properties and characteristics.</p>
+                        <p>High-resolution microscopy visualization of metal matrix composite structure, with technical documentation of material properties.</p>
                         <div class="tools-used">
                             <span class="tool-tag">SEM Analysis</span>
                             <span class="tool-tag">Microstructure</span>
@@ -1269,17 +1163,17 @@
                 
                 <div class="cad-item">
                     <div class="cad-img">
-                        <img src="/api/placeholder/400/220" alt="Process Flow Diagram">
-                        <div class="image-overlay">
+                        <img src="/api/placeholder/400/200" alt="Process Flow Diagram">
+                        <div class="overlay">
                             <div class="overlay-content">
                                 <h4>Manufacturing Process Flow</h4>
-                                <a href="#" class="view-details" data-modal="cad2">View Details</a>
+                                <a href="#" class="view-btn">View Details</a>
                             </div>
                         </div>
                     </div>
                     <div class="cad-content">
                         <h3>Process Flow Optimization</h3>
-                        <p>Comprehensive process flow diagram for manufacturing operations with color-coded quality control checkpoints and timeline visualization.</p>
+                        <p>Comprehensive process flow diagram for manufacturing operations with color-coded quality control checkpoints.</p>
                         <div class="tools-used">
                             <span class="tool-tag">Process Mapping</span>
                             <span class="tool-tag">Quality Control</span>
@@ -1290,17 +1184,17 @@
                 
                 <div class="cad-item">
                     <div class="cad-img">
-                        <img src="/api/placeholder/400/220" alt="Quality Metrics Dashboard">
-                        <div class="image-overlay">
+                        <img src="/api/placeholder/400/200" alt="Quality Metrics Dashboard">
+                        <div class="overlay">
                             <div class="overlay-content">
                                 <h4>Quality Metrics Dashboard</h4>
-                                <a href="#" class="view-details" data-modal="cad3">View Details</a>
+                                <a href="#" class="view-btn">View Details</a>
                             </div>
                         </div>
                     </div>
                     <div class="cad-content">
                         <h3>Interactive Quality Metrics</h3>
-                        <p>Data visualization dashboard for quality performance metrics, defect tracking, and production efficiency monitoring across manufacturing operations.</p>
+                        <p>Data visualization dashboard for quality performance metrics, defect tracking, and production efficiency monitoring.</p>
                         <div class="tools-used">
                             <span class="tool-tag">PowerBI</span>
                             <span class="tool-tag">Data Visualization</span>
@@ -1311,7 +1205,8 @@
             </div>
         </section>
         
-        <section id="experience" class="section">
+        <!-- Experience Section -->
+        <section id="experience">
             <h2>Relevant Experience</h2>
             
             <div class="experience-item">
@@ -1363,7 +1258,8 @@
             </div>
         </section>
         
-        <section id="education" class="section">
+        <!-- Education Section -->
+        <section id="education">
             <h2>Education & Certification</h2>
             
             <div class="experience-item">
@@ -1397,7 +1293,8 @@
             </div>
         </section>
         
-        <section id="contact" class="section">
+        <!-- Contact Section -->
+        <section id="contact">
             <h2>Contact Me</h2>
             <p>I'm currently seeking opportunities as a Creative Evaluator where I can apply my quality assurance expertise and attention to detail to AI-generated content evaluation. Please feel free to reach out via email or phone to discuss how my skills align with your requirements.</p>
             
@@ -1450,11 +1347,11 @@
                     
                     <button type="submit" class="submit-btn">Send Message</button>
                 </form>
-                <div class="loader" id="form-loader"></div>
             </div>
         </section>
     </main>
     
+    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <p>&copy; 2025 Jaibarath Subramaniam Ravichandran</p>
@@ -1477,140 +1374,23 @@
         </div>
     </footer>
     
-    <!-- Scroll to top button -->
-    <div class="scroll-top" id="scroll-top">↑</div>
+    <!-- Back to Top Button -->
+    <div class="back-to-top">↑</div>
     
-    <!-- CAD Drawing Modals -->
-    <div id="cad1-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <img src="/api/placeholder/800/500" alt="Metal Matrix Composite" class="modal-img">
-            <div class="modal-details">
-                <h3>Al-Si Metal Matrix Composite - Technical Details</h3>
-                <p>This high-resolution visualization showcases the microstructure of an aluminum-silicon metal matrix composite developed for high-performance manufacturing applications. The image highlights the interface between the aluminum matrix and silicon reinforcement phases.</p>
-                <p><strong>Key Technical Features:</strong></p>
-                <ul>
-                    <li>Detailed microstructural analysis showing phase distribution and interfacial characteristics</li>
-                    <li>Optimized composition with 15% silicon reinforcement for enhanced mechanical properties</li>
-                    <li>Heat treatment protocol documentation showing microstructural evolution</li>
-                    <li>Correlations between microstructure and mechanical property enhancements</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-    <div id="cad2-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <img src="/api/placeholder/800/500" alt="Process Flow Diagram" class="modal-img">
-            <div class="modal-details">
-                <h3>Process Flow Optimization - Technical Details</h3>
-                <p>This process flow diagram was developed to optimize manufacturing operations by visualizing the complete production pipeline with integrated quality control checkpoints and efficiency metrics. The diagram uses color-coding to highlight critical control points and potential bottlenecks.</p>
-                <p><strong>Key Design Features:</strong></p>
-                <ul>
-                    <li>Color-coded process stages for intuitive visualization of workflow</li>
-                    <li>Integrated quality control checkpoints at critical process junctures</li>
-                    <li>Cycle time and WIP inventory notations at each production stage</li>
-                    <li>Value-added vs. non-value-added step identification for lean optimization</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-    <div id="cad3-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <img src="/api/placeholder/800/500" alt="Quality Metrics Dashboard" class="modal-img">
-            <div class="modal-details">
-                <h3>Quality Metrics Dashboard - Technical Details</h3>
-                <p>This interactive dashboard was designed to provide real-time visualization of quality performance metrics across manufacturing operations. The interface combines multiple data sources to create a comprehensive view of production quality, defect rates, and efficiency statistics.</p>
-                <p><strong>Key Features:</strong></p>
-                <ul>
-                    <li>Real-time defect rate tracking with historical trend analysis</li>
-                    <li>Production efficiency metrics with target vs. actual comparisons</li>
-                    <li>Interactive drill-down capabilities for root cause investigation</li>
-                    <li>Automated alerting system for quality control threshold violations</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
+    <!-- JavaScript -->
     <script>
-        // Add intersection observer for scroll animations
         document.addEventListener('DOMContentLoaded', function() {
             // Slideshow functionality
-            const slides = document.querySelectorAll('.slideshow-slide');
             let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
             
-            // Set slideshow images
-            const slideshowImages = [
-                '/api/placeholder/1200/700',  // Replace with your actual image paths
-                '/api/placeholder/1200/700',
-                '/api/placeholder/1200/700'
-            ];
-            
-            // Initialize slideshow images
-            slides.forEach((slide, index) => {
-                if (index < slideshowImages.length) {
-                    slide.style.backgroundImage = `url('${slideshowImages[index]}')`;
-                }
-            });
-            
-            // Function to change slide
-            function nextSlide() {
+            setInterval(function() {
                 slides[currentSlide].classList.remove('active');
                 currentSlide = (currentSlide + 1) % slides.length;
                 slides[currentSlide].classList.add('active');
-            }
+            }, 5000);
             
-            // Change slide every 5 seconds
-            setInterval(nextSlide, 5000);
-            
-            // Make sections visible when scrolled into view
-            const sections = document.querySelectorAll('.section');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-            
-            // Make navbar sticky and change appearance on scroll
-            const navbar = document.getElementById('main-nav');
-            const sticky = navbar.offsetTop;
-            const scrollTopBtn = document.getElementById('scroll-top');
-            
-            window.onscroll = function() {
-                // Sticky navbar
-                if (window.pageYOffset > sticky) {
-                    navbar.classList.add('sticky');
-                } else {
-                    navbar.classList.remove('sticky');
-                }
-                
-                // Scroll to top button visibility
-                if (window.pageYOffset > 500) {
-                    scrollTopBtn.classList.add('visible');
-                } else {
-                    scrollTopBtn.classList.remove('visible');
-                }
-            };
-            
-            // Scroll to top functionality
-            scrollTopBtn.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-            
-            // Add smooth scrolling for navigation links
+            // Smooth scrolling for navigation links
             document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1629,67 +1409,41 @@
                 });
             });
             
+            // Back to top button
+            const backToTopBtn = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.style.display = 'flex';
+                } else {
+                    backToTopBtn.style.display = 'none';
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
             // Contact form submission
             const contactForm = document.getElementById('contact-form');
-            const formLoader = document.getElementById('form-loader');
             
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    formLoader.style.display = 'block';
-                    
-                    // Simulate form submission
-                    setTimeout(() => {
-                        formLoader.style.display = 'none';
-                        alert('Thank you for your message! I will get back to you soon.');
-                        contactForm.reset();
-                    }, 1500);
-                });
-            }
-            
-            // Resume download button functionality
-            const downloadResumeBtn = document.getElementById('download-resume');
-            if (downloadResumeBtn) {
-                downloadResumeBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert('Your resume download will begin shortly.');
-                    // In a real implementation, this would trigger a file download
-                    // window.location.href = 'resume.pdf';
-                });
-            }
-            
-            // Modal functionality for CAD drawings
-            const modalTriggers = document.querySelectorAll('[data-modal]');
-            const closeButtons = document.querySelectorAll('.close-modal');
-            
-            modalTriggers.forEach(trigger => {
-                trigger.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const modalId = this.getAttribute('data-modal');
-                    const modal = document.getElementById(modalId + '-modal');
-                    if (modal) {
-                        modal.classList.add('show');
-                        document.body.style.overflow = 'hidden';
-                    }
-                });
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! I will get back to you soon.');
+                contactForm.reset();
             });
             
-            closeButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const modal = this.closest('.modal');
-                    if (modal) {
-                        modal.classList.remove('show');
-                        document.body.style.overflow = 'auto';
-                    }
-                });
-            });
+            // Resume download button
+            const downloadResumeBtn = document.getElementById('downloadResume');
             
-            // Close modal when clicking outside of content
-            window.addEventListener('click', function(e) {
-                if (e.target.classList.contains('modal')) {
-                    e.target.classList.remove('show');
-                    document.body.style.overflow = 'auto';
-                }
+            downloadResumeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Your resume will download shortly.');
+                // In a real implementation, you would add:
+                // window.location.href = 'path-to-your-resume.pdf';
             });
         });
     </script>
